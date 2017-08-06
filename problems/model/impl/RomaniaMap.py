@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from search.model.impl.BreadthFirstSearch import BreadthFirstSearch
 from search.model.impl.DepthFirstSearch import DepthFirstSearch
+from search.model.impl.DepthFirstSearch import IterativeDeepingDFS
 from problems.model.impl.MapProblem import MapProblem
 
 map_graph = dict(
@@ -79,9 +80,9 @@ locations_positions = dict(
     Zerind=(108, 531)
 )
 
-p = MapProblem(map_graph, locations_positions, "Arad", "Pitesti")
+p = MapProblem(map_graph, locations_positions, "Arad", "Bucharest")
 
-bfs = DepthFirstSearch(p, 15, True)
+bfs = IterativeDeepingDFS(p, True)
 actions = bfs.solve()
 
 print(actions)
