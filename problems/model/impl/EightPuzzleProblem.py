@@ -22,11 +22,11 @@ class EigthPuzzleProblem(Problem):
         colzero = zeroix[1][0]
         if rowzero == 0:
             acts.remove("UP")
-        if rowzero == 2:
+        if rowzero == self.boardSize-1:
             acts.remove("DW")
         if colzero == 0:
             acts.remove("SX")
-        if colzero == 2:
+        if colzero == self.boardSize-1:
             acts.remove("DX")
         return acts
 
@@ -64,4 +64,11 @@ class EigthPuzzleProblem(Problem):
                 raise BaseException("Is not possible to execute given action in current state!")
             return newstate
         else:
-            raise BaseException("Action specified is unknown!")
+            raise BaseException("Action %s specified is unknown!" % action)
+
+    def goal_test(self, state):
+        return self.same_state(self.goal_state, state)
+
+    @staticmethod
+    def same_state(state1, state2):
+        return np.array_equal(state1, state2)

@@ -33,3 +33,8 @@ class Problem(object):
     def step_cost(self, c, state1=None, action=None, state2=None):
         """ Returns an integer representing the cost of taking action a in state s1 to reach state s2"""
         return c + 1
+
+    @staticmethod
+    def same_state(state1, state2):
+        """ Return true if state1 is equal to state2 """
+        return state1.__eq__(state2)
