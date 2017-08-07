@@ -1,6 +1,3 @@
-import numpy as np
-
-
 class Node(object):
     """ Search algorithms require a data structure to keep track of the search tree that is being constructed.
     For each node n of the tree, we have a structure that contains four components:
@@ -18,3 +15,6 @@ class Node(object):
 
     def __repr__(self):
         return " %s  action: %s , cost: %d , level: %d" % (self.state, self.action, self.path_cost, self.level)
+
+    def __lt__(self, other):
+        return self.path_cost < other.path_cost

@@ -1,8 +1,6 @@
 from problems.model.Problem import Problem
 import networkx as nx
 import matplotlib.pyplot as plt
-from random import shuffle
-import numpy as np
 
 
 class MapProblem(Problem):
@@ -59,4 +57,3 @@ class MapProblem(Problem):
         nx.draw_networkx_labels(self.nxgraph, pos=node_label_pos, labels=node_labels, font_size=14)
         nx.draw_networkx_edge_labels(self.nxgraph, pos=self.locations_positions, edge_labels=edge_labels, font_size=14)
         plt.show()
-

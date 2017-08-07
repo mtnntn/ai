@@ -1,9 +1,9 @@
-import matplotlib.pyplot as plt
-import networkx as nx
+from problems.model.impl.MapProblem import MapProblem
 from search.model.impl.BreadthFirstSearch import BreadthFirstSearch
 from search.model.impl.DepthFirstSearch import DepthFirstSearch
 from search.model.impl.DepthFirstSearch import IterativeDeepingDFS
-from problems.model.impl.MapProblem import MapProblem
+from search.model.impl.UniformedCostSearch import UniformedCostSearch
+from search.model.impl.BidirectionalSearch import BidirectionalSearch
 
 map_graph = dict(
     Arad=dict(
@@ -80,10 +80,22 @@ locations_positions = dict(
     Zerind=(108, 531)
 )
 
+
 p = MapProblem(map_graph, locations_positions, "Arad", "Bucharest")
 
-bfs = IterativeDeepingDFS(p, True)
-actions = bfs.solve()
+s = UniformedCostSearch(p, False)
+print(s.solve(), s.solution_cost)
 
-print(actions)
+s = DepthFirstSearch(p, 7, False)
+print(s.solve(), s.solution_cost)
+
+s = IterativeDeepingDFS(p, False)
+print(s.solve(), s.solution_cost)
+
+s = BidirectionalSearch(p, False)
+print(s.solve(), s.solution_cost)
+
+s = BreadthFirstSearch(p, False)
+print(s.solve(), s.solution_cost)
+
 p.show_map()

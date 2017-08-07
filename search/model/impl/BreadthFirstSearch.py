@@ -1,4 +1,3 @@
-from problems.model.impl.EightPuzzleProblem import EigthPuzzleProblem
 from search.model.Search import Search
 
 
@@ -67,4 +66,3 @@ class BreadthFirstSearch(Search):
             if self.problem.same_state(st.state, state):
                 return True
         return False
-

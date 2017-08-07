@@ -14,22 +14,23 @@ class Search(object):
         self.pathcost = 0
         self.exploredset = []
         self.frontier = [Node(problem.initial_state)]
+        self.solution_cost = 0
 
-    @staticmethod
     def get_solution_nodes(self, node):
         """ Return a list of node rebuilded thanks to the parent pointer.
         The list represent the list of nodes to be attraversed in order to solve the problem. """
         result = list()
+        self.solution_cost = node.path_cost
         while node is not None:
             result.append(node)
             node = node.parent
         return result
 
-    @staticmethod
-    def solution(node):
+    def solution(self, node):
         """ Return a list of actions to be executed in order to solve the problem. The list represent the solution
         for the problem and is build back thanks to the parent's pointer of each node. """
         result = list()
+        self.solution_cost = node.path_cost
         while node.action is not None:
             result.insert(0, node.action)
             node = node.parent
