@@ -34,6 +34,17 @@ class Problem(object):
         """ Returns an integer representing the cost of taking action a in state s1 to reach state s2"""
         return c + 1
 
+    def solve_problem(self, actions):
+        print("\nInitial State:\n")
+        print(self.initial_state)
+        print("\nGoal State   :\n")
+        print(self.goal_state)
+        state = self.initial_state
+        for action in actions:
+            print("\n")
+            state = self.result(state, action)
+            print(state)
+
     @staticmethod
     def same_state(state1, state2):
         """ Return true if state1 is equal to state2 """

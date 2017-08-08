@@ -1,9 +1,9 @@
 from problems.model.impl.MapProblem import MapProblem
-from search.model.impl.BreadthFirstSearch import BreadthFirstSearch
-from search.model.impl.DepthFirstSearch import DepthFirstSearch
-from search.model.impl.DepthFirstSearch import IterativeDeepingDFS
-from search.model.impl.UniformedCostSearch import UniformedCostSearch
-from search.model.impl.BidirectionalSearch import BidirectionalSearch
+from search.model.impl.uninformed.BidirectionalSearch import BidirectionalSearch
+from search.model.impl.uninformed.BreadthFirstSearch import BreadthFirstSearch
+from search.model.impl.uninformed.UniformCostSearch import UniformCostSearch
+from search.model.impl.uninformed.DepthFirstSearch import DepthFirstSearch
+from search.model.impl.uninformed.DepthFirstSearch import IterativeDeepingDFS
 
 map_graph = dict(
     Arad=dict(
@@ -83,7 +83,7 @@ locations_positions = dict(
 
 p = MapProblem(map_graph, locations_positions, "Arad", "Bucharest")
 
-s = UniformedCostSearch(p, False)
+s = UniformCostSearch(p, False)
 print(s.solve(), s.solution_cost)
 
 s = DepthFirstSearch(p, 7, False)

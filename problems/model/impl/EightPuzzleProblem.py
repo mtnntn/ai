@@ -3,7 +3,7 @@ from random import shuffle
 import numpy as np
 
 from problems.model.Problem import Problem
-from search.model.impl.BidirectionalSearch import BidirectionalSearch
+from search.model.impl.uninformed.BidirectionalSearch import BidirectionalSearch
 
 
 class EigthPuzzleProblem(Problem):

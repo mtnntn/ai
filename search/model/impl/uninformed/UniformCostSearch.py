@@ -3,7 +3,7 @@ from search.model.Node import Node
 from bisect import insort_left
 
 
-class UniformedCostSearch(Search):
+class UniformCostSearch(Search):
 
     def __init__(self, problem, trace=False):
         Search.__init__(self, problem, trace)
