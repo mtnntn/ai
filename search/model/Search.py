@@ -6,10 +6,9 @@ class Search(object):
     A concrete implementation must redefine it's own solve method.
     """
 
-    def __init__(self, problem, trace=False):
+    def __init__(self, problem):
         """ Set the problem to solve, initialize the explored set with a new list and the frontier with the initial
         state of the problem to solve. """
-        self.trace = trace
         self.problem = problem
         self.pathcost = 0
         self.exploredset = []

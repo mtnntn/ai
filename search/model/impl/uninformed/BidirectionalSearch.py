@@ -4,7 +4,7 @@ from search.model.Search import Search
 
 class BidirectionalSearch(Search):
 
-    def __init__(self, problem, trace=False):
+    def __init__(self, problem):
 
         if isinstance(problem.goal_state, list):
             self.back_initial_state = problem.goal_state[0]
@@ -16,7 +16,7 @@ class BidirectionalSearch(Search):
         self.back_exploredset = []
         self.back_frontier = [Node(self.back_initial_state)]
 
-        Search.__init__(self, problem, trace)
+        Search.__init__(self, problem)
 
     def solve(self):
 

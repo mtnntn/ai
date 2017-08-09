@@ -3,7 +3,7 @@ from search.model.Node import HeuristicNode
 from bisect import insort_left
 
 
-class GreedySearch(Search):
+class AStarSearch(Search):
 
     def __init__(self, problem, heuristic):
         Search.__init__(self, problem)
@@ -53,6 +53,6 @@ class GreedySearch(Search):
     def child_node(self, parent, action):
         state = self.problem.result(parent.state, action)
         heuristic_cost = self.heuristic.get_heuristic_cost(state)
-        n = HeuristicNode(state, parent, action, 0, heuristic_cost, parent.level+1)
-        n.path_cost = self.problem.step_cost(parent.path_cost, parent.state, action, state)
+        path_cost = self.problem.step_cost(parent.path_cost, parent.state, action, state)
+        n = HeuristicNode(state, parent, action, path_cost, heuristic_cost, parent.level+1)
         return n

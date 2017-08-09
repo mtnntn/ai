@@ -5,8 +5,8 @@ from bisect import insort_left
 
 class UniformCostSearch(Search):
 
-    def __init__(self, problem, trace=False):
-        Search.__init__(self, problem, trace)
+    def __init__(self, problem):
+        Search.__init__(self, problem)
         self.frontier = sorted([Node(self.problem.initial_state)])
 
     def solve(self):

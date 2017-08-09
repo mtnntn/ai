@@ -6,6 +6,7 @@ from search.model.impl.uninformed.UniformCostSearch import UniformCostSearch
 from search.model.impl.uninformed.DepthFirstSearch import DepthFirstSearch
 from search.model.impl.uninformed.DepthFirstSearch import IterativeDeepingDFS
 from search.model.impl.informed.GreedySearch import GreedySearch
+from search.model.impl.informed.AStarSearch import AStarSearch
 
 map_graph = dict(
     Arad=dict(
@@ -110,22 +111,25 @@ heuristic = Heuristic(table)
 
 p = MapProblem(map_graph, locations_positions, "Arad", "Bucharest")
 
-s = UniformCostSearch(p, False)
+s = UniformCostSearch(p)
 print(s.solve(), s.solution_cost)
 
-s = DepthFirstSearch(p, 7, False)
+s = DepthFirstSearch(p, 7)
 print(s.solve(), s.solution_cost)
 
-s = IterativeDeepingDFS(p, False)
+s = IterativeDeepingDFS(p)
 print(s.solve(), s.solution_cost)
 
-s = BidirectionalSearch(p, False)
+s = BidirectionalSearch(p)
 print(s.solve(), s.solution_cost)
 
-s = BreadthFirstSearch(p, False)
+s = BreadthFirstSearch(p)
 print(s.solve(), s.solution_cost)
 
 s = GreedySearch(p, heuristic)
+print(s.solve(), s.solution_cost)
+
+s = AStarSearch(p, heuristic)
 print(s.solve(), s.solution_cost)
 
 p.show_map()
