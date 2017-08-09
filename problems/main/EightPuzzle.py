@@ -5,23 +5,51 @@ from search.model.impl.uninformed.BreadthFirstSearch import BreadthFirstSearch
 from search.model.impl.uninformed.UniformCostSearch import UniformCostSearch
 from search.model.impl.uninformed.DepthFirstSearch import DepthFirstSearch
 from search.model.impl.uninformed.DepthFirstSearch import IterativeDeepingDFS
+from search.model.impl.informed.AStarSearch import AStarSearch
+from search.model.impl.informed.GreedySearch import GreedySearch
+from search.model.Heuristic import Heuristic
 
 # board = np.array([2, 0, 6, 5, 1, 7, 3, 4, 8]).reshape(3, 3)
-board = np.array([7, 2, 4, 5, 0, 6, 8, 3, 1]).reshape(3, 3)
+# board = np.array([7, 2, 4, 5, 0, 6, 8, 3, 1]).reshape(3, 3)
+board = np.array([2, 8, 3, 1, 6, 4, 7, 0, 5]).reshape(3, 3)
+finalboard = np.array([1, 2, 3, 8, 0, 4, 7, 6, 5]).reshape(3, 3)
+
+
+class EightPuzzleHeuristic(Heuristic):
+
+    def __init__(self):
+        Heuristic.__init__(self, None)
+
+    def get_heuristic_cost(self, state):
+        """ Simply return the number of cells that are not in the goal state position """
+        counter = 0
+        res = 0
+        for item in state.reshape(np.size(state)):
+            if not item == counter:
+                res += 1
+            counter += 1
+        return res
 
 p = EigthPuzzleProblem(3, board)
+p.goal_state = finalboard
 
-s = BidirectionalSearch(p)
-print(s.solve(), s.solution_cost)
+heur = EightPuzzleHeuristic()
 
-s = IterativeDeepingDFS(p)
-print(s.solve(), s.solution_cost)
+# All this line are commented because is very inefficient run an uninformed search strategy for the 8 Puzzle problem.
 
-s = DepthFirstSearch(p, 7)
-print(s.solve(), s.solution_cost)
+# s = BidirectionalSearch(p)
+# print(s.solve(), s.solution_cost)
+# s = IterativeDeepingDFS(p)
+# print(s.solve(), s.solution_cost)
+# s = DepthFirstSearch(p, 7)
+# print(s.solve(), s.solution_cost)
+# s = BreadthFirstSearch(p)
+# print(s.solve(), s.solution_cost)
+# s = UniformCostSearch(p)
+# print(s.solve(), s.solution_cost)
 
-s = BreadthFirstSearch(p)
-print(s.solve(), s.solution_cost)
+# s = GreedySearch(p, heur)
+# print(s.solve(), s.solution_cost)
 
-s = UniformCostSearch(p)
+s = AStarSearch(p, heur)
 print(s.solve(), s.solution_cost)
