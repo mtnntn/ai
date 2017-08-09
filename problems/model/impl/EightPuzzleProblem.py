@@ -3,7 +3,6 @@ from random import shuffle
 import numpy as np
 
 from problems.model.Problem import Problem
-from search.model.impl.uninformed.BidirectionalSearch import BidirectionalSearch
 
 
 class EigthPuzzleProblem(Problem):
@@ -75,11 +74,3 @@ class EigthPuzzleProblem(Problem):
     @staticmethod
     def same_state(state1, state2):
         return np.array_equal(state1, state2)
-
-
-p = EigthPuzzleProblem()
-
-bfs = BidirectionalSearch(p, True)
-actions = bfs.solve()
-
-print(actions)
