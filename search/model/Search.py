@@ -30,9 +30,10 @@ class Search(object):
         """ Return a list of actions to be executed in order to solve the problem. The list represent the solution
         for the problem and is build back thanks to the parent's pointer of each node. """
         result = list()
-        self.solution_cost = node.path_cost
         while node.action is not None:
             result.insert(0, node.action)
+            # in case of heuristics this allow to take only the path_cost...
+            self.solution_cost += node.path_cost - node.parent.path_cost
             node = node.parent
         return result
 

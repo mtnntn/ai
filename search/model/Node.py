@@ -18,3 +18,18 @@ class Node(object):
 
     def __lt__(self, other):
         return self.path_cost < other.path_cost
+
+
+class HeuristicNode(Node):
+    def __init__(self, state=None, parent=None, action=None, path_cost=0, heuristic_cost=0, level=0):
+        Node.__init__(self, state, parent, action, path_cost, level)
+        self.heuristic_cost = heuristic_cost
+        self.total_cost = heuristic_cost + path_cost
+
+    def __lt__(self, other):
+        return self.total_cost < other.total_cost
+
+    def __repr__(self):
+        return " %s  action: %s , path_cost: %d , heur_cost: %d, level: %d" % (self.state, self.action,
+                                                                               self.path_cost, self.heuristic_cost,
+                                                                               self.level)

@@ -1,9 +1,11 @@
 from problems.model.impl.MapProblem import MapProblem
+from search.model.Heuristic import Heuristic
 from search.model.impl.uninformed.BidirectionalSearch import BidirectionalSearch
 from search.model.impl.uninformed.BreadthFirstSearch import BreadthFirstSearch
 from search.model.impl.uninformed.UniformCostSearch import UniformCostSearch
 from search.model.impl.uninformed.DepthFirstSearch import DepthFirstSearch
 from search.model.impl.uninformed.DepthFirstSearch import IterativeDeepingDFS
+from search.model.impl.informed.GreedySearch import GreedySearch
 
 map_graph = dict(
     Arad=dict(
@@ -80,6 +82,31 @@ locations_positions = dict(
     Zerind=(108, 531)
 )
 
+table = dict(
+    Arad=366,
+    Bucharest=0,
+    Craiova=160,
+    Drobeta=242,
+    Eforie=161,
+    Fagaras=178,
+    Giurgiu=77,
+    Hirsova=151,
+    Iasi=226,
+    Lugoj=244,
+    Mehadia=241,
+    Neamt=234,
+    Oradea=380,
+    Pitesti=98,
+    Rimnicu=193,
+    Sibiu=253,
+    Timisoara=329,
+    Urziceni=80,
+    Vaslui=199,
+    Zerind=374
+)
+
+heuristic = Heuristic(table)
+
 
 p = MapProblem(map_graph, locations_positions, "Arad", "Bucharest")
 
@@ -96,6 +123,9 @@ s = BidirectionalSearch(p, False)
 print(s.solve(), s.solution_cost)
 
 s = BreadthFirstSearch(p, False)
+print(s.solve(), s.solution_cost)
+
+s = GreedySearch(p, heuristic)
 print(s.solve(), s.solution_cost)
 
 p.show_map()
