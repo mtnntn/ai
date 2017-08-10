@@ -97,7 +97,7 @@ class StochasticHillClimber(Search):
             ev_vc = self.heuristic.get_heuristic_cost(vc.state)
 
             i = 0
-            while (i < self.max_step) and (self.frontier.__len__() > 0) or vc.heuristic_cost==0:
+            while (i < self.max_step) and (self.frontier.__len__() > 0) or vc.heuristic_cost == 0:
 
                 vn = self.frontier.pop(0)
                 ev_vn = vn.heuristic_cost
