@@ -1,7 +1,7 @@
 from random import shuffle
 
 import numpy as np
-
+from search.model.Heuristic import Heuristic
 from problems.model.Problem import Problem
 
 
@@ -74,3 +74,19 @@ class EigthPuzzleProblem(Problem):
     @staticmethod
     def same_state(state1, state2):
         return np.array_equal(state1, state2)
+
+
+class EightPuzzleHeuristic(Heuristic):
+
+    def __init__(self):
+        Heuristic.__init__(self, None)
+
+    def get_heuristic_cost(self, state):
+        """ Simply return the number of cells that are not in the goal state position """
+        counter = 0
+        res = 0
+        for item in state.reshape(np.size(state)):
+            if not item == counter:
+                res += 1
+            counter += 1
+        return res

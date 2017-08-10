@@ -37,7 +37,7 @@ class EigthQueensProblem(Problem):
     def goal_test(self, state):
         c = 0
         while c < state.__len__():
-            r = c + 2
+            r = c + 1
             while r < state.__len__():
                 offset = math.fabs(r - c)
                 same_row = state[r] == state[c]
@@ -55,7 +55,7 @@ class EigthQueensProblem(Problem):
 
     def print_board(self, state):
         board = np.chararray((self.queens, self.queens), itemsize=3, unicode=True)
-        board[:] = ":"
+        board[:] = "-"
         i = 0
         for item in state:
             board[item-1][i] = "Q"
