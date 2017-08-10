@@ -35,3 +35,21 @@ class HeuristicNode(Node):
                                                                                                self.heuristic_cost,
                                                                                                self.total_cost,
                                                                                                self.level)
+
+
+class GameNode(object):
+
+    def __init__(self, state=None, parent=None, action=None, utility=0):
+        self.state = state
+        self.parent = parent
+        self.action = action
+        self.utility = utility
+
+    def __lt__(self, other):
+        return self.utility < other.utility
+
+    def __gt__(self, other):
+        return self.utility > other.utility
+
+    def __repr__(self):
+        return " %s  - action: %s, utility: %d" % (self.state, self.action, self.utility)
