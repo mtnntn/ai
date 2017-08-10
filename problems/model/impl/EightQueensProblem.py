@@ -1,17 +1,19 @@
 import random as random
+import math
 import numpy as np
 from problems.model.Problem import Problem
+from search.model.Heuristic import Heuristic
 
 
-class EigthPuzzleProblem(Problem):
+class EigthQueensProblem(Problem):
 
     def __init__(self, number_of_queens=8, initial=None):
         self.queens = number_of_queens
         if initial is None:
-            i = 0
+            i = 1
             initial = []
-            while i < self.queens:
-                initial.append(random.randint(0, self.queens-1))
+            while i <= self.queens:
+                initial.append(random.randint(1, self.queens-1))
                 i += 1
         Problem.__init__(self, initial, None)
 
@@ -19,9 +21,9 @@ class EigthPuzzleProblem(Problem):
         c = 0
         actions = []
         while c < self.queens:
-            r = 0
-            while r < self.queens:
-                if not r == state[c]:
+            r = 1
+            while r <= self.queens:
+                if not (state[c] == r):
                     tmp = np.array(state)
                     tmp[c] = r
                     actions.append(tmp)
@@ -33,24 +35,19 @@ class EigthPuzzleProblem(Problem):
         return np.copy(action)
 
     def goal_test(self, state):
-        res = True
         c = 0
-        while c < self.queens and res:
-            r = 0
-            while r < self.queens and res:
-                if not r == c:
-                    # I must check if the queen on column r attack diagonally the queen on column c
-                    # interested position is in position |c-r|
-                    if c < r:
-                        res = not (state[r] == c-r)
-                    elif c > r:
-                        res = not (state[r] == r-c)
-                    else:
-                        # break if we have on the same row 2 queens
-                        res = not (state[c] == state[r])
+        while c < state.__len__():
+            r = c + 2
+            while r < state.__len__():
+                offset = math.fabs(r - c)
+                same_row = state[r] == state[c]
+                up_diagonal = state[r] == (state[c] - offset)
+                dw_diagonal = state[r] == (state[c] + offset)
+                if same_row or up_diagonal or dw_diagonal:
+                    return False
                 r += 1
             c += 1
-        return res
+        return True
 
     @staticmethod
     def same_state(state1, state2):
@@ -61,6 +58,28 @@ class EigthPuzzleProblem(Problem):
         board[:] = ":"
         i = 0
         for item in state:
-            board[item][i] = "Q"
+            board[item-1][i] = "Q"
             i += 1
         print(board)
+
+
+class EightQueensHeuristic(Heuristic):
+    def __init__(self):
+        Heuristic.__init__(self, None)
+
+    def get_heuristic_cost(self, state):
+        """ Simply return, for a state, the number of queen's pairs that attack eachother directly or indirectly"""
+        res = 0
+        c = 0
+        while c < state.__len__():
+            r = c+1
+            while r < state.__len__():
+                offset = math.fabs(r - c)
+                same_row = state[r] == state[c]
+                up_diagonal = state[r] == (state[c] - offset)
+                dw_diagonal = state[r] == (state[c] + offset)
+                if same_row or up_diagonal or dw_diagonal:
+                    res += 1
+                r += 1
+            c += 1
+        return res

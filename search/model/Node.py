@@ -30,6 +30,8 @@ class HeuristicNode(Node):
         return self.total_cost < other.total_cost
 
     def __repr__(self):
-        return " %s  action: %s , path_cost: %d , heur_cost: %d, level: %d" % (self.state, self.action,
-                                                                               self.path_cost, self.heuristic_cost,
-                                                                               self.level)
+        return " %s  action: %s , path_cost: %d , heur_cost: %d , tot_cost: %d , level: %d" % (self.state, self.action,
+                                                                                               self.path_cost,
+                                                                                               self.heuristic_cost,
+                                                                                               self.total_cost,
+                                                                                               self.level)
